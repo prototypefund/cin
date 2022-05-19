@@ -10,8 +10,8 @@
 **/.pytest
 
 # Mobile builds
-mobile/.buildozer
-mobile/bin
+cin-mobile/.buildozer
+cin-mobile/bin
 
 # Sphinx
 docs/build/

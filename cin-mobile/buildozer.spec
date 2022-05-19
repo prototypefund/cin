@@ -37,7 +37,7 @@ version = 0.1.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy
+requirements = python3,kivy,cin
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -306,7 +306,7 @@ android.allow_backup = True
 #p4a.source_dir =
 
 # (str) The directory in which python-for-android should look for your own build recipes (if any)
-#p4a.local_recipes =
+p4a.local_recipes = android/recipes
 
 # (str) Filename to the hook for p4a
 #p4a.hook =
