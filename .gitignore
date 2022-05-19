@@ -8,10 +8,3 @@
 *.egg-info
 **/__pycache__
 **/.pytest
-
-# Mobile builds
-cin-mobile/.buildozer
-cin-mobile/bin
-
-# Sphinx
-docs/build/
