@@ -1,32 +1,41 @@
 #: import get_color_from_hex kivy.utils.get_color_from_hex
+#: import SettingsScreen cin.uix.settings
+#: import PosScreen cin.uix.pos
 
 <CRoot>
+	orientation: 'vertical'
+
+	MDToolbar:
+		id: 'toolbar'
+		height: 50
+		elevation: 10
+		title: 'CIN'
+
 	MDBoxLayout:
-		orientation: 'vertical'
-
-		MDToolbar:
-			height: 50
+		MDNavigationRail:
 			elevation: 10
-			title: 'CIN'
 
-		MDBoxLayout:
-			MDNavigationRail:
-				elevation: 10
+			MDNavigationRailItem:
+				icon: 'point-of-sale'
+				text: 'POS'
 
-				MDNavigationRailItem:
-					icon: 'point-of-sale'
-					text: 'Sale'
+				on_release:
+					app.root.ids.main_screen_manager.transition.direction = 'down'
+					app.root.ids.main_screen_manager.current = 'pos'
 
-				MDNavigationRailItem:
-					icon: 'cog-outline'
-					text: 'Settings'
+			MDNavigationRailItem:
+				icon: 'cog-outline'
+				text: 'Settings'
 
-			MDBoxLayout:
-				padding: "24dp"
+				on_release:
+					app.root.ids.main_screen_manager.transition.direction = 'up'
+					app.root.ids.main_screen_manager.current = 'settings'
 
-				ScrollView:
+		ScreenManager:
+			id: main_screen_manager
 
-					MDList:
-						id: box
-						cols: 3
-						spacing: "12dp"
+			PosScreen:
+				name: 'pos'
+
+			SettingsScreen:
+				name: 'settings'

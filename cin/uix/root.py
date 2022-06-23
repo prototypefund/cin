@@ -1,12 +1,12 @@
 """The root module of the uix package."""
 from kivy.lang.builder import Builder
-from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.boxlayout import MDBoxLayout
 
 
 Builder.load_file('uix/root.kv')
 
 
-class CRoot(BoxLayout):
+class CRoot(MDBoxLayout):
     """The root layout of the application."""
 
     pass
