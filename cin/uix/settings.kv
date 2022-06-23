@@ -1,0 +1,9 @@
+
+<SettingsScreen>
+	name: 'settings'
+
+	MDRectangleFlatButton:
+		md_bg_color: app.theme_cls.primary_color
+		on_release: 
+			app.root.ids.main_screen_manager.transition.direction = 'down'
+			app.root.ids.main_screen_manager.current = 'pos'
