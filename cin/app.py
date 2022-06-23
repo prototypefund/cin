@@ -1,7 +1,16 @@
-from xix import app
-from kivy.uix.label import Label
+from cin import config  # noqa: F401
+from kivymd.app import MDApp
+from cin.uix.root import CRoot
 
 
-class App(app.App):
+class App(MDApp):
     def build(self):
-        return Label(text='CIN-POS app')
+        """
+        Initialize the application.
+
+        It will be called only once. If this method returns a widget (tree), it
+        will be used as the root widget and added to the window.
+        """
+        self.theme_cls.primary_palette = 'Brown'
+
+        return CRoot()
