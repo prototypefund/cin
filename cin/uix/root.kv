@@ -1,14 +1,32 @@
-#: import MDBoxLayout kivymd.uix.boxlayout
-#: import MDToolbar kivymd.uix.toolbar
-#: import MDLabel kivymd.uix.label
+#: import get_color_from_hex kivy.utils.get_color_from_hex
 
 <CRoot>
 	MDBoxLayout:
 		orientation: 'vertical'
 
 		MDToolbar:
+			height: 50
+			elevation: 10
 			title: 'CIN'
 
-		MDLabel:
-			text: 'Content'
-			halign: 'center'
+		MDBoxLayout:
+			MDNavigationRail:
+				elevation: 10
+
+				MDNavigationRailItem:
+					icon: 'point-of-sale'
+					text: 'Sale'
+
+				MDNavigationRailItem:
+					icon: 'cog-outline'
+					text: 'Settings'
+
+			MDBoxLayout:
+				padding: "24dp"
+
+				ScrollView:
+
+					MDList:
+						id: box
+						cols: 3
+						spacing: "12dp"
