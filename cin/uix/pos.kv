@@ -1,24 +1,26 @@
 #: import Receipt cin.uix.receipt
 #: import SettingsScreen cin.uix.settings
+#: import Search cin.uix.search
 
-
-<Sale@MDBoxLayout+RectangularElevationBehavior>
 
 <PosScreen>
 	MDBoxLayout:
-		orientation: 'vertical'
+		MDBoxLayout:
+			orientation: 'vertical'
 
-		MDLabel:
-			text: 'Products'
+			MDLabel:
+				text: 'Products'
 
-		MDLabel:
-			text: 'Groups'
+			MDLabel:
+				text: 'Groups'
 
-	Sale:
-		orientation: 'vertical'
-		md_bg_color: 1, 1, 1, 1
+		Sale:
+			orientation: 'vertical'
+			# md_bg_color: 1, 0, 1, 1
 
-		Receipt
+			Search
 
-		MDLabel:
-			text: 'Numbers'
+			Receipt
+
+			MDLabel:
+				text: 'number'

@@ -1,12 +1,7 @@
-from kivymd.uix.datatables import MDDataTable
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.lang.builder import Builder
-from kivy.uix.scrollview import ScrollView
-from kivy.properties import StringProperty
-from kivy.metrics import dp
 from kivy.uix.recycleview import RecycleView
-from kivy.uix.scrollview import ScrollView
-from kivy.uix.widget import Widget
+from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivymd.uix.behaviors import BackgroundColorBehavior
 
 
@@ -17,7 +12,11 @@ class ReceiptListItem(MDBoxLayout, BackgroundColorBehavior):
     pass
 
 
-class Receipt(RecycleView, BackgroundColorBehavior):
+class ReceiptLayout(BackgroundColorBehavior, RecycleBoxLayout):
+    pass
+
+
+class ReceiptList(RecycleView, BackgroundColorBehavior):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.data = [
@@ -27,3 +26,7 @@ class Receipt(RecycleView, BackgroundColorBehavior):
                 'quantity': str(1),
                 'price': str(2.45)
             } for x in range(10)]
+
+
+class Receipt(MDBoxLayout):
+    pass

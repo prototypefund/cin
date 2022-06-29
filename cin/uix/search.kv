@@ -1,0 +1,14 @@
+
+<Search>
+	size_hint_y: None
+	height: text_field.height
+
+    MDTextField:
+        id: text_field
+        hint_text: 'search'
+
+    MDIconButton:
+        icon: 'magnify'
+        pos_hint: {"center_y": .6}
+        pos: text_field.width - self.width + dp(6), 0
+        theme_text_color: "Hint"
