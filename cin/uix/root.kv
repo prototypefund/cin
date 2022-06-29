@@ -1,8 +1,9 @@
 #: import get_color_from_hex kivy.utils.get_color_from_hex
 #: import SettingsScreen cin.uix.settings
 #: import PosScreen cin.uix.pos
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
 
-<CRoot>
+<Root>
 	orientation: 'vertical'
 
 	MDToolbar:
@@ -21,7 +22,7 @@
 				text: 'POS'
 
 				on_release:
-					app.root.ids.main_screen_manager.transition.direction = 'down'
+					# app.root.ids.main_screen_manager.transition.direction = 'down'
 					app.root.ids.main_screen_manager.current = 'pos'
 
 			MDNavigationRailItem:
@@ -29,11 +30,12 @@
 				text: 'Settings'
 
 				on_release:
-					app.root.ids.main_screen_manager.transition.direction = 'up'
+					# app.root.ids.main_screen_manager.transition.direction = 'up'
 					app.root.ids.main_screen_manager.current = 'settings'
 
 		ScreenManager:
 			id: main_screen_manager
+			transition: FadeTransition()
 
 			PosScreen:
 				name: 'pos'

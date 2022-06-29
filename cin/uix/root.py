@@ -6,7 +6,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 Builder.load_file('uix/root.kv')
 
 
-class CRoot(MDBoxLayout):
+class Root(MDBoxLayout):
     """The root layout of the application."""
 
     pass

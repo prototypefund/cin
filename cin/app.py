@@ -1,6 +1,6 @@
 from cin import config  # noqa: F401
 from kivymd.app import MDApp
-from cin.uix.root import CRoot
+from cin.uix.root import Root
 
 
 class App(MDApp):
@@ -13,4 +13,4 @@ class App(MDApp):
         """
         self.theme_cls.primary_palette = 'Brown'
 
-        return CRoot()
+        return Root()
