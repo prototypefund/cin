@@ -2,9 +2,11 @@
 #: import SettingsScreen cin.uix.settings
 #: import Search cin.uix.search
 #: import PrductScreen cin.uix.products
+#: import ResultScreen cin.uix.results
 
 
 <PosScreen>
+	id: pos
 	md_bg_color: 1, 1, 1, 1
 
 	MDBoxLayout:
@@ -12,13 +14,11 @@
 			id: product_screen_manager
 			transition: FadeTransition()
 
-			ProductScreen
-
-		# PosScreen:
-		# 	name: 'pos'
-		#
-		# SettingsScreen:
-		# 	name: 'settings'
+			# ProductScreen
+			# 	name: 'products'
+			#
+			ResultScreen
+				name: 'results'
 
 		Sale:
 			orientation: 'vertical'
