@@ -12,12 +12,14 @@
 	MDBoxLayout:
 		ProductScreenManager:
 			id: product_screen_manager
-			transition: FadeTransition()
+			transition: FadeTransition(duration=0.2)
 
-			# ProductScreen
-			# 	name: 'products'
-			#
+			ProductScreen
+				md_bg_color: 1, 1, 1, 1
+				name: 'products'
+
 			ResultScreen
+				md_bg_color: 1, 1, 1, 1
 				name: 'results'
 
 		Sale:
@@ -33,6 +35,8 @@
 
 				Button:
 					text: 'product list'
+					on_press: product_screen_manager.current = 'products'
 
 				Button:
 					text: 'search result'
+					on_press: product_screen_manager.current = 'results'

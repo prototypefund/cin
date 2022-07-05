@@ -1,12 +1,13 @@
 from kivymd.uix.screen import MDScreen
 from kivy.lang.builder import Builder
+from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.datatables import MDDataTable
 from kivy.metrics import dp
 
 Builder.load_file('uix/results.kv')
 
 
-class ResultScreen(MDScreen):
+class ResultTable(MDFloatLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -33,3 +34,7 @@ class ResultScreen(MDScreen):
         )
 
         self.add_widget(self.table)
+
+
+class ResultScreen(MDScreen):
+    pass
