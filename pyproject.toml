@@ -17,7 +17,8 @@ license = {text = 'AGPLv3'}
 dependencies = [
     'python_version>"3.8"',
     'kivy[base]',
-    'kivymd'
+    'kivymd',
+    'alembic'
 ]
 
 [project.optional-dependencies]
