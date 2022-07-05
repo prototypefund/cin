@@ -1,18 +1,24 @@
 #: import Receipt cin.uix.receipt
 #: import SettingsScreen cin.uix.settings
 #: import Search cin.uix.search
+#: import PrductScreen cin.uix.products
 
 
 <PosScreen>
+	md_bg_color: 1, 1, 1, 1
+
 	MDBoxLayout:
-		MDBoxLayout:
-			orientation: 'vertical'
+		ProductScreenManager:
+			id: product_screen_manager
+			transition: FadeTransition()
 
-			MDLabel:
-				text: 'Products'
+			ProductScreen
 
-			MDLabel:
-				text: 'Groups'
+		# PosScreen:
+		# 	name: 'pos'
+		#
+		# SettingsScreen:
+		# 	name: 'settings'
 
 		Sale:
 			orientation: 'vertical'
@@ -22,5 +28,11 @@
 
 			Receipt
 
-			MDLabel:
-				text: 'number'
+			MDBoxLayout:
+				orientation: 'vertical'
+
+				Button:
+					text: 'product list'
+
+				Button:
+					text: 'search result'

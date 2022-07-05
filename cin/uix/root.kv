@@ -5,15 +5,18 @@
 
 <Root>
 	orientation: 'vertical'
+	# md_bg_color: app.theme_cls.primary_dark
 
 	MDToolbar:
 		id: 'toolbar'
 		height: 50
-		elevation: 10
+		# elevation: 10
 		md_bg_color: app.theme_cls.primary_dark
 		title: 'CIN'
 
 	MDBoxLayout:
+		spacing: 4
+
 		MDNavigationRail:
 			elevation: 10
 
@@ -22,7 +25,6 @@
 				text: 'POS'
 
 				on_release:
-					# app.root.ids.main_screen_manager.transition.direction = 'down'
 					app.root.ids.main_screen_manager.current = 'pos'
 
 			MDNavigationRailItem:
@@ -30,15 +32,15 @@
 				text: 'Settings'
 
 				on_release:
-					# app.root.ids.main_screen_manager.transition.direction = 'up'
 					app.root.ids.main_screen_manager.current = 'settings'
 
-		ScreenManager:
-			id: main_screen_manager
-			transition: FadeTransition()
+		MDScreen:
+			ScreenManager:
+				id: main_screen_manager
+				transition: FadeTransition()
 
-			PosScreen:
-				name: 'pos'
+				PosScreen:
+					name: 'pos'
 
-			SettingsScreen:
-				name: 'settings'
+				SettingsScreen:
+					name: 'settings'
