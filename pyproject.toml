@@ -1,0 +1,36 @@
+[build-system]
+requires = ['setuptools']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'cin'
+version = '0.1.0'
+description = 'Cin is a point-of-sale frontend.'
+authors = [
+    {name = 'lluar', email = 'lluar@ccodein.org'}
+]
+maintainers = [
+    {name = 'lluar', email = 'lluar@ccodein.org'}
+]
+license = {text = 'AGPLv3'}
+
+dependencies = [
+    'python_version>"3.8"',
+    'kivy[base]',
+    'kivymd'
+]
+
+[project.optional-dependencies]
+develop = [
+    'pytest',
+    'pytest-cov',
+    'mypy',
+    'flake8',
+    'flake8-docstrings'
+]
+
+[tool.setuptools.packages]
+find = {}
+
+[project.scripts]
+cin = 'cin:cin'
