@@ -1,0 +1,30 @@
+
+
+<DatabaseUpgrade>
+    size_hint: None, None
+    size: "300dp", "200dp"
+	pos_hint: {'center_x': .5, 'center_y': .5}
+	padding: 12
+	focus_behavior: True
+
+	MDBoxLayout:
+		orientation: 'vertical'
+		MDLabel:
+			size_hint_y: None
+			height: '30dp'
+			text: 'Database upgrade'
+
+		MDSeparator:
+
+		MDLabel:
+			theme_text_color: 'Secondary'
+			font_style: 'Body2'
+			text:
+				'In order to use the application, an upgrade of the ' \
+				'database schema must be performed.'
+
+
+		MDRaisedButton:
+			size_hint_x: None
+			pos_hint: {'right': 1}
+			text: 'apply'
