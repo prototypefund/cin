@@ -1,6 +1,5 @@
 from cin import config  # noqa: F401
 from kivymd.app import MDApp
-from cin.uix.root import Root
 from kivy.core.window import Window
 from pathlib import Path
 from sqlalchemy import create_engine
@@ -9,6 +8,11 @@ from kivy.animation import Animation
 from cin.database import needs_upgrade
 from cin.uix.database import DatabaseUpgrade
 from cin.uix.app import App as AppWidget
+from kivymd.uix.floatlayout import MDFloatLayout
+
+
+class Root(MDFloatLayout):
+    """The root layout of the application."""
 
 
 class App(MDApp):
