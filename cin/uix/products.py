@@ -36,6 +36,7 @@ class ProductNavigationList(RecycleView):
                 'text': 'TEXT' + 'd'*x,
             } for x in range(6)]
 
+
 class ProductLayout(MDRecycleGridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
