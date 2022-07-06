@@ -5,9 +5,10 @@ from kivy.core.window import Window
 from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from alembic import command
-from alembic.config import Config
-from cin.database import Base
+from kivy.animation import Animation
+from cin.database import needs_upgrade
+from cin.uix.database import DatabaseUpgrade
+from cin.uix.app import App as AppWidget
 
 
 class App(MDApp):
@@ -42,10 +43,13 @@ class App(MDApp):
         return super().get_application_config(path)
 
     def on_start(self):
-        db_url = self.config['database']['url']
-        alembic_cfg = Config()
-        alembic_cfg.set_main_option('script_location', 'cin:alembic')
-        alembic_cfg.set_main_option('sqlalchemy.url', db_url)
-        command.upgrade(alembic_cfg, "head")
-        # self.db_engine = create_engine(db_url, echo=True, future=True)
-        # self.db_session = sessionmaker(self.db_engine)
+        if needs_upgrade():
+            self._db_upgrade = DatabaseUpgrade()
+            self.root.add_widget(self._db_upgrade)
+
+    def after_db_upgrade(self):
+        self.root.remove_widget(self._db_upgrade)
+        app_widget = AppWidget(opacity=.0)
+        self.root.add_widget(app_widget)
+        animation = Animation(opacity=1., duration=1., t='in_out_sine')
+        animation.start(app_widget)

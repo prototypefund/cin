@@ -1,3 +1,42 @@
+#: import apply_upgrade cin.database.apply_upgrade
+
+
+<DatabaseUpgradeDialog>
+	orientation: 'vertical'
+
+	MDLabel:
+		size_hint_y: None
+		height: '30dp'
+		text: 'Database upgrade'
+
+	MDSeparator:
+
+	MDLabel:
+		theme_text_color: 'Secondary'
+		font_style: 'Body2'
+		text:
+			'In order to use the application, an upgrade of the ' \
+			'database schema must be performed.'
+
+
+	MDRaisedButton:
+		size_hint_x: None
+		pos_hint: {'right': 1}
+		text: 'apply'
+		on_release: root.parent.apply_upgrade()
+
+
+<DatabaseUpgradeProgress>
+	orientation: 'vertical'
+
+	MDSpinner:
+		size_hint: None, None
+		size: dp(45), dp(46)
+		pos_hint: {'center_x': .5, 'center_y': .5}
+
+	MDLabel:
+		theme_text_color: 'Secondary'
+		text: 'The update is in progress. Please be patient.'
 
 
 <DatabaseUpgrade>
@@ -6,25 +45,7 @@
 	pos_hint: {'center_x': .5, 'center_y': .5}
 	padding: 12
 	focus_behavior: True
+	elevation: 8
 
-	MDBoxLayout:
-		orientation: 'vertical'
-		MDLabel:
-			size_hint_y: None
-			height: '30dp'
-			text: 'Database upgrade'
-
-		MDSeparator:
-
-		MDLabel:
-			theme_text_color: 'Secondary'
-			font_style: 'Body2'
-			text:
-				'In order to use the application, an upgrade of the ' \
-				'database schema must be performed.'
-
-
-		MDRaisedButton:
-			size_hint_x: None
-			pos_hint: {'right': 1}
-			text: 'apply'
+	# DatabaseUpgradeProgress
+	# DatabaseUpgradeDialog:
