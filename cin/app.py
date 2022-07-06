@@ -16,6 +16,12 @@ class Root(MDFloatLayout):
 
 
 class App(MDApp):
+    def _add_app_widget(self):
+        app_widget = AppWidget(opacity=.0)
+        self.root.add_widget(app_widget)
+        animation = Animation(opacity=1., duration=1., t='in_out_sine')
+        animation.start(app_widget)
+
     def build(self):
         """
         Initialize the application.
@@ -47,13 +53,16 @@ class App(MDApp):
         return super().get_application_config(path)
 
     def on_start(self):
-        if needs_upgrade():
+        db_url = self.config['database']['url']
+        self.db_engine = create_engine(db_url)
+        self.db_session = sessionmaker(self.db_engine)
+
+        if needs_upgrade(self):
             self._db_upgrade = DatabaseUpgrade()
             self.root.add_widget(self._db_upgrade)
+        else:
+            self._add_app_widget()
 
     def after_db_upgrade(self):
         self.root.remove_widget(self._db_upgrade)
-        app_widget = AppWidget(opacity=.0)
-        self.root.add_widget(app_widget)
-        animation = Animation(opacity=1., duration=1., t='in_out_sine')
-        animation.start(app_widget)
+        self._add_app_widget()
