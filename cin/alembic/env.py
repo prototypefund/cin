@@ -17,6 +17,7 @@ if config.config_file_name is not None:
 # add your model's MetaData object here
 # for 'autogenerate' support
 from cin.database import Base
+from cin.models import *
 # target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
 
