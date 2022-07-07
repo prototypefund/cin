@@ -5,10 +5,12 @@ from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from kivy.animation import Animation
+from kivy.properties import OptionProperty
+from kivymd.uix.floatlayout import MDFloatLayout
+from kivy.metrics import dp
 from cin.database import needs_upgrade
 from cin.uix.database import DatabaseUpgrade
 from cin.uix.app import App as AppWidget
-from kivymd.uix.floatlayout import MDFloatLayout
 
 
 class Root(MDFloatLayout):
@@ -16,13 +18,47 @@ class Root(MDFloatLayout):
 
 
 class App(MDApp):
-    def _add_app_widget(self):
+    device = OptionProperty('S', options=('S', 'M', 'L'))
+    """The media property (The possible values are S, M and L)"""
+
+    def __init__(
+            self,
+            small_device: str = 470,
+            medium_device: str = 1200,
+            **kwargs: int
+            ) -> None:
+        """Initialize the App class instance."""
+        super().__init__(**kwargs)
+        self._small_device = dp(small_device)
+        self._medium_device = dp(medium_device)
+        Window.bind(on_resize=self._update_device)
+
+    def _add_app_widget(self) -> None:
+        """Add the applications root widget."""
         app_widget = AppWidget(opacity=.0)
         self.root.add_widget(app_widget)
         animation = Animation(opacity=1., duration=1., t='in_out_sine')
         animation.start(app_widget)
 
-    def build(self):
+    def _update_device(self, window: Window, width: int, height: int) -> None:
+        """
+        Update the device property.
+
+        This is an internal callback that responds to the resize event of
+        the window and sets the media property accordingly.
+
+        Args:
+            window: The application window.
+            width: The new width.
+            height: The new window height.
+        """
+        self.device = (
+            'S' if width < self._small_device else
+            'M' if width < self._medium_device else
+            'L'
+        )
+
+    def build(self) -> None:
         """
         Initialize the application.
 
@@ -35,7 +71,9 @@ class App(MDApp):
 
         return Root()
 
-    def build_config(self, config):
+
+    def build_config(self, config) -> None:
+        """Build the initial config file."""
         config.setdefaults('database', {
             'url': f'sqlite:///{self.data_dir/"cin.db"}'
         })
