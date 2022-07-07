@@ -2,6 +2,7 @@ from cin import config  # noqa: F401
 from kivymd.app import MDApp
 from kivy.core.window import Window
 from pathlib import Path
+import pickle
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from kivy.animation import Animation
@@ -35,10 +36,10 @@ class App(MDApp):
 
     def _add_app_widget(self) -> None:
         """Add the applications root widget."""
-        app_widget = AppWidget(opacity=.0)
-        self.root.add_widget(app_widget)
+        self.app = AppWidget(opacity=.0)
+        self.root.add_widget(self.app)
         animation = Animation(opacity=1., duration=1., t='in_out_sine')
-        animation.start(app_widget)
+        animation.start(self.app)
 
     def _update_device(self, window: Window, width: int, height: int) -> None:
         """
@@ -74,8 +75,8 @@ class App(MDApp):
 
     def build_config(self, config) -> None:
         """Build the initial config file."""
-        config.setdefaults('database', {
-            'url': f'sqlite:///{self.data_dir/"cin.db"}'
+        config.setdefaults('cin', {
+            'db_url': f'sqlite:///{self.data_dir/"cin.db"}',
         })
 
     @property
@@ -91,7 +92,7 @@ class App(MDApp):
         return super().get_application_config(path)
 
     def on_start(self):
-        db_url = self.config['database']['url']
+        db_url = self.config['cin']['db_url']
         self.db_engine = create_engine(db_url)
         self.db_session = sessionmaker(self.db_engine)
 

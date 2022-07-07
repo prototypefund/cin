@@ -1,12 +1,39 @@
 #: import SettingsScreen cin.uix.settings
 #: import PosScreen cin.uix.pos
 #: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import CardTransition kivy.uix.screenmanager.CardTransition
+
+<PosNavigation>
+	icon: 'point-of-sale'
+	text: 'POS'
+
+<AppNavigation>
+	use_hover_behavior: True
+	elevation: 10
+	
+	MDNavigationRailItem:
+		icon: 'point-of-sale'
+		text: 'POS'
+
+		on_release:
+			app.app.ids.main_screen_manager.current = 'pos'
+			app.app.ids.main_screen_manager.transition.direction = 'down'
+
+	MDNavigationRailItem:
+		icon: 'cog-outline'
+		text: 'Settings'
+
+		# on_release: root.on_pos_release()
+		on_release:
+			app.app.ids.main_screen_manager.current = 'settings'
+			app.app.ids.main_screen_manager.transition.direction = 'up'
+
 
 <App>
+	id: app
 	orientation: 'vertical'
-	# md_bg_color: app.theme_cls.primary_dark
 
-	MDToolbar:
+	AppBar:
 		id: 'toolbar'
 		height: 50
 		# elevation: 10
@@ -16,27 +43,12 @@
 	MDBoxLayout:
 		spacing: 4
 
-		MDNavigationRail:
-			elevation: 10
-
-			MDNavigationRailItem:
-				icon: 'point-of-sale'
-				text: 'POS'
-
-				on_release:
-					app.root.ids.main_screen_manager.current = 'pos'
-
-			MDNavigationRailItem:
-				icon: 'cog-outline'
-				text: 'Settings'
-
-				on_release:
-					app.root.ids.main_screen_manager.current = 'settings'
+		AppNavigation
 
 		MDScreen:
 			ScreenManager:
 				id: main_screen_manager
-				transition: FadeTransition()
+				transition: CardTransition()
 
 				PosScreen:
 					name: 'pos'

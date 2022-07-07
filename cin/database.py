@@ -38,7 +38,7 @@ def needs_upgrade(app):
     Args:
         app: The running app instance.
     """
-    db_url = app.config['database']['url']
+    db_url = app.config['cin']['db_url']
     alembic_cfg = Config()
     alembic_cfg.set_main_option('script_location', 'cin:alembic')
     alembic_cfg.set_main_option('sqlalchemy.url', db_url)
@@ -61,7 +61,7 @@ def apply_upgrade(app):
     Args:
         app: The running app instance.
     """
-    db_url = app.config['database']['url']
+    db_url = app.config['cin']['db_url']
     alembic_cfg = Config()
     alembic_cfg.set_main_option('script_location', 'cin:alembic')
     alembic_cfg.set_main_option('sqlalchemy.url', db_url)
