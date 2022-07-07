@@ -1,6 +1,5 @@
 """The module for database handling."""
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer
+from sqlalchemy.orm import declarative_base, declared_attr
 from alembic import command
 from alembic.config import Config
 from alembic.migration import MigrationContext
@@ -23,8 +22,10 @@ meta = MetaData(
 
 class Base:
     """The Base class for all ORM models."""
-    id = Column(Integer, primary_key=True)
-    """The primary key for all Models:"""
+
+    @declared_attr
+    def __tablename__(cls):
+        return cls.__name__.lower()
 
 
 Base = declarative_base(cls=Base, metadata=meta)

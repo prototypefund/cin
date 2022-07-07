@@ -4,12 +4,12 @@ from sqlalchemy.orm import relationship
 from cin.database import Base
 
 
-class ProductGroup(Base):
+class Category(Base):
     """The model for product groups."""
-    __tablename__ = 'product_groups'
+    __tablename__ = 'category'
 
-    group_id = Column(String, unique=True, nullable=False)
-    parent_id = Column(String, ForeignKey('product_groups.group_id'))
+    id = Column(String, primary_key=True)
+    parent_id = Column(String, ForeignKey('category.id'))
     name = Column(String, nullable=False)
     description = Column(String)
-    children = relationship('ProductGroup')
+    children = relationship('Category')
