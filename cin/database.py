@@ -6,6 +6,19 @@ from alembic.config import Config
 from alembic.migration import MigrationContext
 from alembic.script import ScriptDirectory
 from alembic.runtime.environment import EnvironmentContext
+from sqlalchemy import MetaData
+
+
+meta = MetaData(
+    naming_convention={
+        "ix": "ix_%(column_0_label)s",
+        "uq": "uq_%(table_name)s_%(column_0_name)s",
+        "ck": "ck_%(table_name)s_%(constraint_name)s",
+        "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+        "pk": "pk_%(table_name)s"
+    }
+)
+"""The SQLAlchemy naming convention."""
 
 
 class Base:
@@ -14,7 +27,7 @@ class Base:
     """The primary key for all Models:"""
 
 
-Base = declarative_base(cls=Base)
+Base = declarative_base(cls=Base, metadata=meta)
 
 
 def needs_upgrade(app):
