@@ -36,5 +36,5 @@ class ResultTable(MDFloatLayout):
         self.add_widget(self.table)
 
 
-class ResultScreen(MDScreen):
+class Result(MDScreen):
     pass

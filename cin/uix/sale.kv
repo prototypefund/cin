@@ -1,0 +1,23 @@
+#: import Receipt cin.uix.receipt
+#: import Search cin.uix.search
+
+
+<Sale>
+	orientation: 'vertical'
+	# md_bg_color: 1, 0, 1, 1
+
+	Search
+
+	Receipt
+
+	MDBoxLayout:
+		orientation: 'vertical'
+
+		Button:
+			text: 'product list'
+			on_press: product_screen_manager.current = 'products'
+
+		Button:
+			text: 'search result'
+			on_press: product_screen_manager.current = 'results'
+

@@ -36,17 +36,14 @@
         # height: self.minimum_height
         orientation: 'horizontal'
 
-<ProductScreen>
-	id: products_screen
+<Products>
+	orientation: 'vertical'
 
-	MDBoxLayout:
-		orientation: 'vertical'
-
-		ProductNavigationList:
-			size_hint_y: None
-			height: dp(50)
+	ProductNavigationList:
+		size_hint_y: None
+		height: dp(50)
 
 
-		# MDSeparator
+	# MDSeparator
 
-		ProductGrid
+	ProductGrid

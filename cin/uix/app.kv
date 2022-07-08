@@ -23,20 +23,17 @@
 		icon: 'cog-outline'
 		text: 'Settings'
 
-		# on_release: root.on_pos_release()
 		on_release:
 			app.app.ids.main_screen_manager.current = 'settings'
 			app.app.ids.main_screen_manager.transition.direction = 'up'
 
 
 <App>
-	id: app
 	orientation: 'vertical'
 
 	AppBar:
 		id: 'toolbar'
 		height: 50
-		# elevation: 10
 		md_bg_color: app.theme_cls.primary_dark
 		title: 'CIN'
 
