@@ -1,8 +1,8 @@
 from cin import config  # noqa: F401
 from kivymd.app import MDApp
+from kivymd.uix.screen import MDScreen
 from kivy.core.window import Window
 from pathlib import Path
-import pickle
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from kivy.animation import Animation
@@ -14,7 +14,7 @@ from cin.uix.database import DatabaseUpgrade
 from cin.uix.app import App as AppWidget
 
 
-class Root(MDFloatLayout):
+class Root(MDScreen):
     """The root layout of the application."""
 
 

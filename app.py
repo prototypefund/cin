@@ -1,91 +1,76 @@
-from kivymd.app import MDApp
-from kivy.clock import Clock
 from kivy.lang import Builder
-from kivy.factory import Factory
-from kivy.properties import StringProperty
+from kivy.properties import ObjectProperty
 
-from kivymd.uix.button import MDIconButton
-from kivymd.icon_definitions import md_icons
-from kivymd.uix.list import ILeftBodyTouch, OneLineIconListItem
-from kivymd.theming import ThemeManager
-from kivymd.utils import asynckivy
+from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
 
-Builder.load_string('''
-<ItemForList>
-    text: root.text
+KV = '''
+<ContentNavigationDrawer>
 
-    IconLeftSampleWidget:
-        icon: root.icon
+    ScrollView:
 
+        MDList:
 
-<Example@FloatLayout>
+            OneLineListItem:
+                text: "Screen 1"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 1"
 
-    MDBoxLayout:
-        orientation: 'vertical'
-
-        MDToolbar:
-            title: app.title
-            md_bg_color: app.theme_cls.primary_color
-            background_palette: 'Primary'
-            elevation: 10
-            left_action_items: [['menu', lambda x: x]]
-
-        MDScrollViewRefreshLayout:
-            id: refresh_layout
-            refresh_callback: app.refresh_callback
-            root_layout: root
-
-            MDGridLayout:
-                id: box
-                adaptive_height: True
-                cols: 1
-''')
+            OneLineListItem:
+                text: "Screen 2"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr 2"
 
 
-class IconLeftSampleWidget(ILeftBodyTouch, MDIconButton):
-    pass
+MDScreen:
+
+    MDTopAppBar:
+        id: toolbar
+        pos_hint: {"top": 1}
+        elevation: 10
+        title: "MDNavigationDrawer"
+        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+
+    MDNavigationLayout:
+        x: toolbar.height
+
+        ScreenManager:
+            id: screen_manager
+
+            MDScreen:
+                name: "scr 1"
+
+                MDLabel:
+                    text: "Screen 1"
+                    halign: "center"
+
+            MDScreen:
+                name: "scr 2"
+
+                MDLabel:
+                    text: "Screen 2"
+                    halign: "center"
+
+        MDNavigationDrawer:
+            id: nav_drawer
+            type: 'standard'
+
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
+'''
 
 
-class ItemForList(OneLineIconListItem):
-    icon = StringProperty()
+class ContentNavigationDrawer(MDBoxLayout):
+    screen_manager = ObjectProperty()
+    nav_drawer = ObjectProperty()
 
 
-class Example(MDApp):
-    title = 'Example Refresh Layout'
-    screen = None
-    x = 0
-    y = 15
-
+class TestNavigationDrawer(MDApp):
     def build(self):
-        self.screen = Factory.Example()
-        self.set_list()
-
-        return self.screen
-
-    def set_list(self):
-        async def set_list():
-            names_icons_list = list(md_icons.keys())[self.x:self.y]
-            for name_icon in names_icons_list:
-                await asynckivy.sleep(0)
-                self.screen.ids.box.add_widget(
-                    ItemForList(icon=name_icon, text=name_icon))
-        asynckivy.start(set_list())
-
-    def refresh_callback(self, *args):
-        '''A method that updates the state of your application
-        while the spinner remains on the screen.'''
-
-        def refresh_callback(interval):
-            self.screen.ids.box.clear_widgets()
-            if self.x == 0:
-                self.x, self.y = 15, 30
-            else:
-                self.x, self.y = 0, 15
-            self.set_list()
-            self.screen.ids.refresh_layout.refresh_done()
-            self.tick = 0
-
-        Clock.schedule_once(refresh_callback, 1)
+        return Builder.load_string(KV)
 
 
-Example().run()
+TestNavigationDrawer().run()

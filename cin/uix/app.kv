@@ -8,47 +8,76 @@
 	text: 'POS'
 
 <AppNavigation>
-	use_hover_behavior: True
 	elevation: 10
-	
-	MDNavigationRailItem:
-		icon: 'point-of-sale'
-		text: 'POS'
+	type: 'standard'
+	# size_hint_x: None
+	# width: '190dp'
 
-		on_release:
-			app.app.ids.main_screen_manager.current = 'pos'
-			app.app.ids.main_screen_manager.transition.direction = 'down'
+	ScrollView:
+		MDList:
+			OneLineIconListItem:
+				text: 'POS'
+				on_release: 
+					root.parent.parent.ids.main_screen_manager.transition.direction = 'up'
+					root.parent.parent.ids.main_screen_manager.current = 'settings'
 
-	MDNavigationRailItem:
-		icon: 'cog-outline'
-		text: 'Settings'
+				IconLeftWidget:
+					icon: 'point-of-sale'
 
-		on_release:
-			app.app.ids.main_screen_manager.current = 'settings'
-			app.app.ids.main_screen_manager.transition.direction = 'up'
+			OneLineIconListItem:
+				text: 'Settings'
+				on_release: 
+					root.parent.parent.ids.main_screen_manager.transition.direction = 'down'
+					root.parent.parent.ids.main_screen_manager.current = 'pos'
+
+				IconLeftWidget:
+					icon: 'cog-outline'
 
 
 <App>
 	orientation: 'vertical'
 
 	AppBar:
-		id: 'toolbar'
-		height: 50
+		id: toolbar
+		height: 30
 		md_bg_color: app.theme_cls.primary_dark
 		title: 'CIN'
+		left_action_items:
+            [['menu', lambda x: navigation.set_state('toggle')]]
 
-	MDBoxLayout:
-		spacing: 4
+	MDNavigationLayout:
+		ScreenManager:
+			id: main_screen_manager
+			transition: CardTransition()
 
-		AppNavigation
+			MDScreen:
+				name: 'pos'
 
-		MDScreen:
-			ScreenManager:
-				id: main_screen_manager
-				transition: CardTransition()
+				MDLabel:
+					text: 'pos'
 
-				PosScreen:
-					name: 'pos'
+			# PosScreen:
+				# name: 'pos'
 
-				SettingsScreen:
-					name: 'settings'
+			SettingsScreen:
+				name: 'settings'
+
+		AppNavigation:
+			id: navigation
+
+
+	# MDBoxLayout:
+	# 	spacing: 4
+	#
+	# 	AppNavigation
+	#
+	# 	MDScreen:
+	# 		ScreenManager:
+	# 			id: main_screen_manager
+	# 			transition: CardTransition()
+	#
+	# 			PosScreen:
+	# 				name: 'pos'
+	#
+	# 			SettingsScreen:
+	# 				name: 'settings'
