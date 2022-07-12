@@ -1,6 +1,5 @@
 #: import SettingsScreen cin.uix.settings
 #: import PosScreen cin.uix.pos
-#: import FadeTransition kivy.uix.screenmanager.FadeTransition
 #: import CardTransition kivy.uix.screenmanager.CardTransition
 
 <PosNavigation>
@@ -17,18 +16,18 @@
 		MDList:
 			OneLineIconListItem:
 				text: 'POS'
-				on_release: 
-					root.parent.parent.ids.main_screen_manager.transition.direction = 'up'
-					root.parent.parent.ids.main_screen_manager.current = 'settings'
+				on_release:
+					app.refs['main_screen_manager'].transition.direction = 'down'
+					app.refs['main_screen_manager'].current = 'pos'
 
 				IconLeftWidget:
 					icon: 'point-of-sale'
 
 			OneLineIconListItem:
 				text: 'Settings'
-				on_release: 
-					root.parent.parent.ids.main_screen_manager.transition.direction = 'down'
-					root.parent.parent.ids.main_screen_manager.current = 'pos'
+				on_release:
+					app.refs['main_screen_manager'].transition.direction = 'up'
+					app.refs['main_screen_manager'].current = 'settings'
 
 				IconLeftWidget:
 					icon: 'cog-outline'
@@ -50,34 +49,11 @@
 			id: main_screen_manager
 			transition: CardTransition()
 
-			MDScreen:
+			PosScreen:
 				name: 'pos'
-
-				MDLabel:
-					text: 'pos'
-
-			# PosScreen:
-				# name: 'pos'
 
 			SettingsScreen:
 				name: 'settings'
 
 		AppNavigation:
 			id: navigation
-
-
-	# MDBoxLayout:
-	# 	spacing: 4
-	#
-	# 	AppNavigation
-	#
-	# 	MDScreen:
-	# 		ScreenManager:
-	# 			id: main_screen_manager
-	# 			transition: CardTransition()
-	#
-	# 			PosScreen:
-	# 				name: 'pos'
-	#
-	# 			SettingsScreen:
-	# 				name: 'settings'
