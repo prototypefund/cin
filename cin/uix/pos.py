@@ -96,5 +96,10 @@ class Pos(MDScreen):
     #         self.add_widget(self._layout_default)
 
 
-class PosScreen(MDScreen, ScreenManager):
-    pass
+class PosScreen(MDScreen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+    def on_kv_post(self, widget):
+        app = MDApp.get_running_app()
+        app.refs['pos_screen_manager'] = self.ids.pos_screen_manager

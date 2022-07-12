@@ -25,8 +25,8 @@ class ResultTable(MDFloatLayout):
             row_data=[
                 (
                     "1",
-                    "Test group",
-                    "Test product",
+                    "Test group\ndsdsdsds",
+                    "Test product\nsdsdsd\ndsdsdsdsds",
                     "12,45",
                 ),
             ],

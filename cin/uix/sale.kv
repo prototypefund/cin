@@ -1,24 +1,168 @@
 #: import Receipt cin.uix.receipt
 #: import Search cin.uix.search
 
+<NumberButton>
+	size_hint: 1, 1
+	font_size: '20sp'
+	md_bg_color: app.theme_cls.primary_color
+    text_color: 1, 1, 1, 1
+	icon_color: 1, 1, 1, 1
+	icon: ''
+
+
+<NumberActionButton>
+	size_hint: 1, 1
+	font_size: '20sp'
+	md_bg_color: app.theme_cls.primary_color
+    text_color: 1, 1, 1, 1
+	icon_color: 1, 1, 1, 1
+
 
 <Sale>
+	padding: '5dp'
 	orientation: 'vertical'
-	# size_hint: 1, 1
-	# md_bg_color: 1, 0, 1, 1
+	size_hint_x: None
+	width: '500dp'
+	elevation: 4
+	md_bg_color: 1, 1, 1, 1
 
 	Search
 
 	Receipt
 
 	MDBoxLayout:
+		size_hint_y: None
+		height: '400dp'
 		orientation: 'vertical'
+		MDSeparator
+			size_hint_x: None
+			width: '120dp'
+			pos_hint: {'x': 0.74}
+		MDBoxLayout:
+			orientation: 'vertical'
+			size_hint_y: None
+			padding: '15dp'
+			height: '70dp'
 
-		Button:
-			text: 'product list'
-			on_press: product_screen_manager.current = 'products'
+			MDLabel:
+				halign: 'right'
+				text: '122.43'
+				font_style: 'H6'
 
-		Button:
-			text: 'search result'
-			on_press: product_screen_manager.current = 'results'
+		ScreenManager:
+			id: number_screen_manager
 
+			MDScreen:
+				name: 'first_screen'
+				BoxLayout:
+					orientation: 'horizontal'
+
+					MDGridLayout:
+						cols: 3
+						rows: 4
+						spacing: '5dp'
+						padding: '5dp'
+
+						NumberButton:
+							text: '7'
+
+						NumberButton:
+							text: '8'
+
+						NumberButton:
+							text: '9'
+
+
+						NumberButton:
+							text: '4'
+
+						NumberButton:
+							text: '5'
+
+						NumberButton:
+							text: '6'
+
+						NumberButton:
+							text: '1'
+
+						NumberButton:
+							text: '2'
+
+						NumberButton:
+							text: '3'
+
+						NumberButton:
+							text: '+'
+
+						NumberButton:
+							text: '0'
+
+						NumberButton:
+							text: '-'
+
+					MDBoxLayout:
+						size_hint_x: None
+						width: '190sp'
+						orientation: 'vertical'
+						spacing: '5dp'
+						padding: '0dp', '5dp','5dp', '5dp'
+
+						NumberActionButton:
+							text: ' more'
+							icon: 'page-next-outline'
+							halign: 'left'
+							on_press:
+								root.ids.number_screen_manager.transition.direction = 'left'
+								root.ids.number_screen_manager.current = 'second_screen'
+
+						NumberActionButton:
+							text: ' Card payment'
+							icon: 'credit-card-check-outline'
+							halign: 'left'
+
+						NumberActionButton:
+							text: ' Cash payment'
+							icon: 'cash-multiple'
+							halign: 'left'
+
+						NumberActionButton:
+							text: ' Enter'
+							icon: 'send'
+							halign: 'left'
+							on_press:
+								app.refs['pos_screen_manager'].current = 'results'
+
+			MDScreen:
+				name: 'second_screen'
+				BoxLayout:
+					orientation: 'horizontal'
+
+					MDGridLayout:
+						cols: 3
+						rows: 4
+						spacing: '5dp'
+						padding: '5dp'
+						row_default_height: '85dp'
+						row_force_default: True
+						NumberActionButton:
+							text: ' back'
+							icon: 'page-previous-outline'
+							halign: 'left'
+							on_press:
+								root.ids.number_screen_manager.transition.direction = 'right'
+								root.ids.number_screen_manager.current = 'first_screen'
+
+						NumberActionButton:
+							text: ' Deposit'
+							icon: 'cash-plus'
+							halign: 'left'
+
+						NumberActionButton:
+							text: 'Withdrawal'
+							icon: 'cash-minus'
+							halign: 'left'
+
+						NumberActionButton:
+							text: 'Checkout'
+							icon: 'cash-refund'
+							halign: 'left'

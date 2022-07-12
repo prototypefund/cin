@@ -1,94 +1,15 @@
-
 <ReceiptListItem>
-	number: ''
-	product: ''
-	quantity: ''
-	price: ''
-	orientation: 'vertical'
-	md_bg_color: 1, 1, 1, 1
+	ReceiptActions:
+		MDCheckbox:
 
-	MDBoxLayout:
-		orientation: 'horizontal'
-		MDCheckbox
 
+	ReceiptPrice:
+		size_hint_x: None
 		MDLabel:
-			text: root.number
-
-		MDLabel:
-			text: root.product
-
-		MDLabel:
-			text: root.quantity
-
-		MDLabel:
-			text: root.price
-
-
-<ReceiptList>
-    viewclass: 'ReceiptListItem'
-
-    ReceiptLayout:
-		md_bg_color: 0.9, 0.9, 0.9, 1.0
-        default_size: None, dp(56)
-        default_size_hint: 1, None
-		spacing: 1
-        size_hint_y: None
-        height: self.minimum_height
-        orientation: 'vertical'
+			text: '1111.34'
 
 <Receipt>
-	orientation: 'vertical'
-	# spacing: 5
-
-	MDBoxLayout:
-		orientation: 'horizontal'
-        size_hint_y: None
-        height: dp(30)
-
-		MDCheckbox
-
-		MDLabel:
-			bold: True
-			text: 'Nr.'
-
-		MDLabel:
-			bold: True
-			text: 'Product'
-
-		MDLabel:
-			bold: True
-			text: 'Qty.'
-
-		MDLabel:
-			bold: True
-			text: 'Price'
-
-		# md_bg_color: app.theme_cls.primary_light
-
-
-	ReceiptList
-
-	MDBoxLayout:
-		orientation: 'horizontal'
-        size_hint_y: None
-        height: dp(30)
-
-		MDLabel:
-			bold: True
-			text: 'Sum:'
-
-		MDLabel:
-			bold: True
-			text: ''
-
-		MDLabel:
-			bold: True
-			text: ''
-
-		MDLabel:
-			bold: True
-			text: ''
-
-		MDLabel:
-			bold: True
-			text: '21.34'
+	MDList:
+		ReceiptListItem:
+		    text: "Two-line item with avatar"
+			secondary_text: "Secondary text here"

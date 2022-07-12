@@ -1,97 +1,24 @@
-#: import Receipt cin.uix.receipt
-#: import SettingsScreen cin.uix.settings
-#: import Search cin.uix.search
-#: import ProductScreen cin.uix.products
 #: import ResultScreen cin.uix.results
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
 
 
 <PosLayoutSmall>
 	tab_hint_x: True
-
-# 	# PosTabSmall:
-# 	# 	id: sale
-# 	# 	title: 'Sale'
-#
-
 
 <PosLayoutDefault>
 
 
 <PosScreen>
 	md_bg_color: 1, 1, 1, 1
-	transition: FadeTransition(duration=0.2)
 
-	Pos:
-		name: 'pos'
-		md_bg_color: 1, 1, 1, 1
+	ScreenManager:
+		transition: FadeTransition(duration=0.2)
+		id: pos_screen_manager
 
-	Result:
-		name: 'results'
-		md_bg_color: 1, 1, 1, 1
+		Pos:
+			name: 'pos'
+			md_bg_color: 1, 1, 1, 1
 
-
-# <ProductScreenManager>
-# 	transition: FadeTransition(duration=0.2)
-#
-# 	# ProductScreen
-# 	# 	md_bg_color: 1, 1, 1, 1
-# 	# 	name: 'products'
-#
-# 	ResultScreen
-# 		md_bg_color: 1, 1, 1, 1
-# 		name: 'results'
-# 	
-	# PosLayoutSmall:
-
-		# orientation: 'vertical'
-
-		# MDSegmentedControl:
-		# 	radius: 0
-		# 	segment_panel_height: "100dp"
-		# 	size_hint_x: None
-		# 	width: '500dp'
-		# 	# size_hint: 1., 1.
-		# 	# pos_hint: {"center_x": .5, "center_y": .5}
-		#
-		# 	MDSegmentedControlItem:
-		# 		text: "Products"
-		#
-		# 	MDSegmentedControlItem:
-		# 		text: "Sale"
-		#
-		# 	MDSegmentedControlItem:
-		# 		text: "Products"
-		#
-		# MDLabel:
-		# 	text: 'screen'
-
-		# ProductScreenManager:
-		# 	id: product_screen_manager
-		# 	transition: FadeTransition(duration=0.2)
-		#
-		# 	# ProductScreen
-		# 	# 	md_bg_color: 1, 1, 1, 1
-		# 	# 	name: 'products'
-		#
-		# 	ResultScreen
-		# 		md_bg_color: 1, 1, 1, 1
-		# 		name: 'results'
-		#
-		# Sale:
-		# 	orientation: 'vertical'
-		# 	# md_bg_color: 1, 0, 1, 1
-		#
-		# 	Search
-		#
-		# 	Receipt
-		#
-		# 	MDBoxLayout:
-		# 		orientation: 'vertical'
-		#
-		# 		Button:
-		# 			text: 'product list'
-		# 			on_press: product_screen_manager.current = 'products'
-		#
-		# 		Button:
-		# 			text: 'search result'
-		# 			on_press: product_screen_manager.current = 'results'
+		Result:
+			name: 'results'
+			md_bg_color: 1, 1, 1, 1
