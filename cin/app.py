@@ -32,6 +32,7 @@ class App(MDApp):
         super().__init__(**kwargs)
         self._small_device = dp(small_device)
         self._medium_device = dp(medium_device)
+        self.refs = {}
         Window.bind(on_resize=self._update_device)
 
     def _add_app_widget(self) -> None:
