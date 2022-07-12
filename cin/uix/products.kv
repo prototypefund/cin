@@ -1,5 +1,6 @@
-<ProductNavigationItem>
-	pos_hint: {"center_x": .5, "center_y": .5}
+#: import md_icons kivymd.icon_definitions.md_icons
+# <ProductNavigationItem>
+# 	pos_hint: {"center_x": .5, "center_y": .5}
 
 <ProductCard>
 	radius: '0dp'
@@ -19,13 +20,13 @@
         size_hint_y: None
 		height: self.minimum_height
 
-<ProductNavigationListItem>
-	# size_hint_y: None
-	# pos_hint: {"center_x": .5, "center_y": .5}
-
-<ProductNavigationList>
-    viewclass: 'ProductNavigationListItem'
-
+# <ProductNavigationListItem>
+# 	# size_hint_y: None
+# 	# pos_hint: {"center_x": .5, "center_y": .5}
+#
+# <ProductNavigationList>
+#     viewclass: 'ProductNavigationListItem'
+#
   #   ReceiptLayout:
 		# # md_bg_color: 0.9, 0.9, 0.9, 1.0
   #       # default_size: None, dp(56)
@@ -39,11 +40,28 @@
 <Products>
 	orientation: 'vertical'
 
-	ProductNavigationList:
-		size_hint_y: None
-		height: dp(50)
+	# ProductNavigationList:
+	# 	size_hint_y: None
+	# 	height: dp(50)
+	#
 
+	ScrollView:
+		size_hint_y: None
+		height: '60dp'
+		do_scroll_y: False
+
+		ProductNavigation:
+			md_bg_color: 1, 1, 1, 1
+			segment_color: 0.95, 0.95, 0.95, 1
+			size_hint_y: None
+			radius: 0
+
+			MDSegmentedControlItem:
+				text: md_icons['home']
+				font_style: 'Icon'
+
+			MDSegmentedControlItem:
+				text: 'fff'
 
 	# MDSeparator
-
 	ProductGrid

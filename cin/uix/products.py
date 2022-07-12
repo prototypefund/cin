@@ -1,17 +1,11 @@
-from kivymd.uix.screen import MDScreen
 from kivy.lang.builder import Builder
 from kivymd.uix.recyclegridlayout import MDRecycleGridLayout
 from kivymd.uix.behaviors import RoundedRectangularElevationBehavior
 from kivymd.uix.card import MDCard
 from kivy.uix.recycleview import RecycleView
-from kivymd.uix.floatlayout import MDFloatLayout
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.button import MDFlatButton
-from kivymd.uix.label import MDLabel
-from kivy.uix.scrollview import ScrollView
-from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.core.window import Window
-from kivymd.uix.behaviors import BackgroundColorBehavior
+from kivymd.uix.segmentedcontrol import MDSegmentedControl
 
 
 Builder.load_file('uix/products.kv')
@@ -21,21 +15,8 @@ class Products(MDBoxLayout):
     pass
 
 
-class ProductNavigationListItem(MDFlatButton):
+class ProductNavigation(MDSegmentedControl):
     pass
-
-
-class ProductNavigationLayout(RecycleBoxLayout):
-    pass
-
-
-class ProductNavigationList(RecycleView):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.data = [
-            {
-                'text': 'TEXT' + 'd'*x,
-            } for x in range(6)]
 
 
 class ProductLayout(MDRecycleGridLayout):
