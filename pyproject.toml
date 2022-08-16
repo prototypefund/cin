@@ -18,7 +18,8 @@ dependencies = [
     'python_version>"3.8"',
     'kivy[base]',
     'kivymd',
-    'alembic'
+    'alembic',
+    'tse.py'
 ]
 
 [project.optional-dependencies]
