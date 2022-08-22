@@ -21,6 +21,7 @@ class Root(MDScreen):
 class App(MDApp):
     device = OptionProperty('S', options=('S', 'M', 'L'))
     """The media property (The possible values are S, M and L)"""
+    use_kivy_settings = False
 
     def __init__(
             self,
