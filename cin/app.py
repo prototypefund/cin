@@ -37,7 +37,9 @@ class App(MDApp):
 
     def _add_app_widget(self) -> None:
         """Add the applications root widget."""
-        self.app = AppWidget(opacity=.0)
+        from cin.uix import settings
+        self.app = settings.SettingsScreen()
+        # self.app = AppWidget(opacity=.0)
         self.root.add_widget(self.app)
         animation = Animation(opacity=1., duration=1., t='in_out_sine')
         animation.start(self.app)
@@ -73,11 +75,11 @@ class App(MDApp):
 
         return Root()
 
-
     def build_config(self, config) -> None:
         """Build the initial config file."""
         config.setdefaults('cin', {
             'db_url': f'sqlite:///{self.data_dir/"cin.db"}',
+            'tse_enabled': False
         })
 
     @property
