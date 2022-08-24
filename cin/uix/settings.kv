@@ -1,6 +1,125 @@
+#: import TseEnableSwitch cin.uix.settings
+#: import TseHostField cin.uix.settings
+#: import TseClientNameField cin.uix.settings
+#: import TseFullExportButton cin.uix.settings
+
+
+<SettingsCard>
+	title: ''
+	orientation: 'vertical'
+	elevation: 2
+	radius: 0
+	padding: '6dp'
+
+	MDLabel:
+		text: 'test'
+		size_hint_y: None
+		height: '35dp'
+		theme_text_color: 'Custom'
+        text_color: self.theme_cls.primary_dark
+		bold: True
+		text: root.title
+
+	MDSeparator
+
+
+<Tse>
+	do_scroll_y: True
+
+	MDGridLayout:
+		padding: '16dp'
+		spacing: '16dp'
+		size_hint_y: None
+		height: self.minimum_height
+		row_default_height: 300
+		cols: 1
+
+		SettingsCard:
+			title: 'Einstellung'
+
+			MDGridLayout:
+				padding: [0, '10p']
+				cols: 2
+
+
+				MDLabel:
+					size_hint: None, None
+					width: '250dp'
+					height: '40dp'
+					text: 'TSE aktiviert:'
+
+				TseEnableSwitch
+					size_hint: None, None
+					height: '40dp'
+					pos_hint: {'left': .0, 'center_y': .5}
+
+				MDLabel:
+					size_hint: None, None
+					height: '40dp'
+					width: '250dp'
+					text: 'Name der Kasse:'
+
+				TseClientNameField:
+					size_hint: None, None
+					mode: "rectangle"
+					height: '40dp'
+					width: '250dp'
+					pos_hint: {'left': .0, 'center_y': .5}
+					hint_text: 'Kassenname'
+					text: app.config['tse']['client_name']
+
+				MDLabel:
+					size_hint: None, None
+					height: '40dp'
+					width: '250dp'
+					text: 'Epson TSE Host:'
+
+				TseHostField:
+					size_hint: None, None
+					mode: "rectangle"
+					height: '40dp'
+					width: '250dp'
+					pos_hint: {'left': .0, 'center_y': .5}
+					hint_text: 'IP-Adresse oder Hostname'
+					text: app.config['tse']['host']
+		SettingsCard:
+			title: 'Export'
+
+			MDGridLayout:
+				padding: [0, '10p']
+				cols: 2
+
+				MDLabel:
+					size_hint: None, None
+					height: '40dp'
+					width: '250dp'
+					text: 'TSE-Logs archivieren'
+
+				TseFullExportButton:
+					text: 'export'
+					size_hint: None, None
+					height: '40dp'
+					width: '250dp'
+					pos_hint: {'left': .0, 'center_y': .5}
+
+		SettingsCard:
+			title: 'Information'
+
+			MDLabel:
+				text: 'TSE-Logs archivierten'
+
+<Profile>
+	MDLabel:
+		text: 'Profile'
+
 
 <SettingsScreen>
 	md_bg_color: 1, 1, 1, 1
 
-	MDLabel:
-		text: 'settings'
+	MDTabs:
+		Tse:
+			title: 'TSE'
+
+		Profile:
+			title: 'Profile'
+

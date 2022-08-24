@@ -80,7 +80,11 @@ class App(MDApp):
         """Build the initial config file."""
         config.setdefaults('cin', {
             'db_url': f'sqlite:///{self.data_dir/"cin.db"}',
-            'tse_enabled': False
+        })
+        config.setdefaults('tse', {
+            'enabled': False,
+            'client_name': '',
+            'host': ''
         })
 
     @property
@@ -105,6 +109,9 @@ class App(MDApp):
             self.root.add_widget(self._db_upgrade)
         else:
             self._add_app_widget()
+
+    def on_stop(self):
+        self.config.write()
 
     def after_db_upgrade(self):
         self.root.remove_widget(self._db_upgrade)
