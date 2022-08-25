@@ -8,7 +8,9 @@ from kivymd.uix.selectioncontrol import MDSwitch
 from kivy.app import App
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.button import MDRaisedButton
+from kivymd.uix.label import MDLabel
 from kivymd.uix.filemanager import MDFileManager
+from cin.uix.message import Message
 from pathlib import Path
 
 
@@ -20,7 +22,11 @@ class SettingsCard(MDCard, RectangularElevationBehavior):
 
 
 class SettingsScreen(MDScreen):
-    pass
+    ...
+
+
+class SettingsDescription(MDLabel):
+    ...
 
 
 class Tse(MDScrollView, MDTabsBase):
@@ -35,6 +41,24 @@ class TseEnableSwitch(MDSwitch):
 
     def on_active(self, instance, value):
         super().on_active(instance, value)
+
+        if value:
+            if not self._app.config['tse']['client_name'] or \
+                    not self._app.config['tse']['host']:
+                message = Message(
+                    text='Der TSE Kassenname und der TSE-Host '
+                    'sind nicht konfiguriert.')
+
+                message.buttons = [
+                    MDRaisedButton(
+                        text='SCHLIEßEN',
+                        on_release=message.dismiss
+                    )
+                ]
+
+                message.open()
+                self.active = value = False
+
         self._app.config['tse']['enabled'] = str(value)
 
 
