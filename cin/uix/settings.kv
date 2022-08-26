@@ -43,7 +43,7 @@
 		SettingsCard:
 			title: 'Einstellung'
 			size_hint_y: None
-			height: '300dp'
+			height: '380dp'
 
 			MDGridLayout:
 				padding: [0, '10p']
@@ -71,6 +71,19 @@
 					pos_hint: {'left': .0, 'center_y': .5}
 					hint_text: 'Kassenname'
 					text: app.config['tse']['client_name']
+
+				SettingsDescription:
+					text: 'The TSE-ID:'
+
+				TseIdField:
+					size_hint: None, None
+					mode: "rectangle"
+					height: '30dp'
+					width: '200dp'
+					# width: '250dp'
+					pos_hint: {'left': .0, 'center_y': .5}
+					hint_text: 'TSE-ID'
+					text: app.config['tse']['id']
 
 				SettingsDescription:
 					text: 'Epson TSE Host:'

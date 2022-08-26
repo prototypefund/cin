@@ -11,6 +11,7 @@ from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.label import MDLabel
 from kivymd.uix.filemanager import MDFileManager
 from cin.uix.message import Message
+from cin.tse import enable_tse
 from pathlib import Path
 
 
@@ -44,10 +45,11 @@ class TseEnableSwitch(MDSwitch):
 
         if value:
             if not self._app.config['tse']['client_name'] or \
+                    not self._app.config['tse']['id'] or \
                     not self._app.config['tse']['host']:
                 message = Message(
-                    text='Der TSE Kassenname und der TSE-Host '
-                    'sind nicht konfiguriert.')
+                    text='Der TSE Kassenname, der TSE-Host und '
+                    'die TSE-ID müssen konfiguriert sein.')
 
                 message.buttons = [
                     MDRaisedButton(
@@ -58,6 +60,8 @@ class TseEnableSwitch(MDSwitch):
 
                 message.open()
                 self.active = value = False
+            else:
+                enable_tse(self._app, True)
 
         self._app.config['tse']['enabled'] = str(value)
 
@@ -66,6 +70,12 @@ class TseClientNameField(MDTextField):
     def on_text(self, instance, value):
         app = App.get_running_app()
         app.config['tse']['client_name'] = value
+
+
+class TseIdField(MDTextField):
+    def on_text(self, instance, value):
+        app = App.get_running_app()
+        app.config['tse']['id'] = value
 
 
 class TseHostField(MDTextField):
