@@ -1,15 +1,11 @@
 """The module contains the database models."""
-from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, JSON
 from cin.database import Base
 
 
-class Category(Base):
+class Products(Base):
     """The model for product groups."""
-    __tablename__ = 'category'
+    __tablename__ = 'products'
 
     id = Column(String, primary_key=True)
-    parent_id = Column(String, ForeignKey('category.id'))
-    name = Column(String, nullable=False)
-    description = Column(String)
-    children = relationship('Category')
+    data = Column(JSON)
