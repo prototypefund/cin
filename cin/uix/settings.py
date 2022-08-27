@@ -84,6 +84,12 @@ class TseHostField(MDTextField):
         app.config['tse']['host'] = value
 
 
+class BackendUrlField(MDTextField):
+    def on_text(self, instance, value):
+        app = App.get_running_app()
+        app.config['backend']['url'] = value
+
+
 class TseFullExportButton(MDRaisedButton):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -105,5 +111,5 @@ class TseFullExportButton(MDRaisedButton):
         self._file_manager.close()
 
 
-class Profile(MDTabsBase):
+class Backend(MDScrollView, MDTabsBase):
     ...

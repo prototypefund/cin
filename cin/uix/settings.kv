@@ -116,9 +116,38 @@
 			MDLabel:
 				text: 'TSE-Logs archivierten'
 
-<Profile>
-	MDLabel:
-		text: 'Profile'
+<Backend>
+	do_scroll_y: True
+
+	MDGridLayout:
+		padding: '16dp'
+		spacing: '16dp'
+		size_hint_y: None
+		height: self.minimum_height
+		# row_default_height: 300
+		cols: 1
+
+		SettingsCard:
+			title: 'Einstellung'
+			size_hint_y: None
+			height: '380dp'
+
+			MDGridLayout:
+				padding: [0, '10p']
+				cols: 2
+				spacing: '15dp'
+
+				SettingsDescription:
+					text: 'URL des Backends:'
+
+				BackendUrlField:
+					size_hint: None, None
+					mode: "rectangle"
+					height: '30dp'
+					width: '200dp'
+					pos_hint: {'left': .0, 'center_y': .5}
+					hint_text: 'URL zur JSON-API'
+					text: app.config['backend']['url']
 
 
 <SettingsScreen>
@@ -128,6 +157,6 @@
 		Tse:
 			title: 'TSE'
 
-		Profile:
-			title: 'Profile'
+		Backend:
+			title: 'Backend'
 

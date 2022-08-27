@@ -90,6 +90,9 @@ class App(MDApp):
             'client_name': '',
             'host': '',
             'id': ''
+        }),
+        config.setdefaults('backend', {
+            'url': '',
         })
 
     @property
