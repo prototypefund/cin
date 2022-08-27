@@ -1,4 +1,3 @@
-
 from kivy.lang.builder import Builder
 from kivymd.uix.snackbar import Snackbar
 
