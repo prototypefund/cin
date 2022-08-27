@@ -1,6 +1,7 @@
 """The module for database related widgets."""
 from kivy.lang.builder import Builder
 from kivymd.uix.card import MDCard
+from kivymd.uix.behaviors.elevation import RectangularElevationBehavior
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.app import App
 from cin.database import apply_upgrade
@@ -18,7 +19,7 @@ class DatabaseUpgradeProgress(MDBoxLayout):
     pass
 
 
-class DatabaseUpgrade(MDCard):
+class DatabaseUpgrade(MDCard, RectangularElevationBehavior):
     """A dialog that pops up when a database upgrade is needed."""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

@@ -9,7 +9,6 @@ from kivy.animation import Animation
 from kivy.properties import OptionProperty
 from kivy.metrics import dp
 from cin.database import needs_upgrade
-from cin import sync
 from cin.uix.database import DatabaseUpgrade
 from cin.uix.app import App as AppWidget
 
@@ -41,12 +40,12 @@ class App(MDApp):
         # from cin.uix import settings
         # self.app = settings.SettingsScreen()
 
-        sync.products(self)
+        # sync.products(self)
         self.app = AppWidget(opacity=.0)
         self.root.add_widget(self.app)
         # hack to trigger device event after AppWidget
-        self.device = 'S'
-        self._update_device(Window, Window.width, Window.height)
+        # self.device = 'S'
+        # self._update_device(Window, Window.width, Window.height)
         animation = Animation(opacity=1., duration=1., t='in_out_sine')
         animation.start(self.app)
 
