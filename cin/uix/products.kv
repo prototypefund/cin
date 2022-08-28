@@ -1,49 +1,77 @@
 #: import md_icons kivymd.icon_definitions.md_icons
-# <ProductNavigationItem>
-# 	pos_hint: {"center_x": .5, "center_y": .5}
 
 <ProductCard>
 	radius: '0dp'
 	# size_hint: None, None
-	# width: dp(100)
-	# height: dp(100)
+	# width: dp(200)
+	# height: dp(150)
 	elevation: 4
 
+    MDRelativeLayout:
+
+		Image:
+			size_hint_x: 1
+			source: root.image
+
+        MDIconButton:
+            icon: 'information-outline'
+            pos_hint: {'top': 1, 'right': 1}
+
+		MDBoxLayout:
+			orientation: 'vertical'
+			size_hint_y: None
+			height: '40dp'
+			padding: '5dp'
+			md_bg_color: 0.9, 0.9, 0.9, 0.9
+
+			MDLabel:
+				id: label
+				text: root.name
+				# color: "grey"
+			MDLabel:
+				id: label
+				font_style: 'Body2'
+				text: root.price
+				# color: "grey"
 
 <ProductGrid>
-    viewclass: 'ProductCard'
-
-    ProductLayout:
-		cols: 3
-		padding: dp(10)
-		spacing: dp(10)
-        size_hint_y: None
+	# do_scroll_y: True
+	MDGridLayout:
+		id: grid
+		size_hint_y: None
+		cols: 2
+		col_default_width: '200dp'
+		row_default_height: '150dp'
+		col_force_default: True
 		height: self.minimum_height
+		padding: dp(10)
+		spacing: dp(15)
 
-# <ProductNavigationListItem>
-# 	# size_hint_y: None
-# 	# pos_hint: {"center_x": .5, "center_y": .5}
+		# ProductCard
+		# ProductCard
+		# ProductCard
+		# ProductCard
+		# ProductCard
+		# ProductCard
+		# ProductCard
+		# ProductCard
+		# ProductCard
+
+# <ProductGrid>
+#     viewclass: 'Button'
+#     # viewclass: 'ProductCard'
 #
-# <ProductNavigationList>
-#     viewclass: 'ProductNavigationListItem'
-#
-  #   ReceiptLayout:
-		# # md_bg_color: 0.9, 0.9, 0.9, 1.0
-  #       # default_size: None, dp(56)
-  #       default_size_hint: None, 1
-		# # spacing: 1
-  #       size_hint_x: None
-  #       width: self.minimum_width
-  #       # height: self.minimum_height
-  #       orientation: 'horizontal'
+#     ProductLayout:
+# 		cols: 1
+# 		# padding: dp(10)
+# 		# spacing: dp(10)
+#         size_hint_y: None
+# 		# height: '200dp'
+# 		col_default_width: '200dp'
+# 		height: self.minimum_height
 
 <Products>
 	orientation: 'vertical'
-
-	# ProductNavigationList:
-	# 	size_hint_y: None
-	# 	height: dp(50)
-	#
 
 	ScrollView:
 		size_hint_y: None
