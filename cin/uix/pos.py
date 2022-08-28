@@ -13,13 +13,13 @@ class Pos(MDScreen):
         super().__init__(**kwargs)
         self._app = MDApp.get_running_app()
 
-        message = Message(
-            text='Die Produkt werder mit dem Server synchronisiert.',
-            auto_dismiss=True)
+        # message = Message(
+        #     text='Die Produkt werder mit dem Server synchronisiert.',
+        #     auto_dismiss=True)
+        #
+        # message.open()
 
-        message.open()
         sync.products(self._app)
-
 
 class PosScreen(MDScreen):
     def __init__(self, **kwargs):
