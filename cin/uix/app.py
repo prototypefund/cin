@@ -18,10 +18,14 @@ class App(MDBoxLayout):
 
 
 class AppBar(MDTopAppBar):
-    pass
+    ...
 
 
 class AppNavigation(MDNavigationDrawer):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.set_state('close')
+        self._app = MDApp.get_running_app()
+
+    def on_state(self, instance, value):
+        self._app.refs['product-grid'].on_resize()

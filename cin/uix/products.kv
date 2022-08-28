@@ -1,5 +1,57 @@
 #: import md_icons kivymd.icon_definitions.md_icons
 
+<ProductInfo>
+	orientation: 'vertical'
+	size_hint_y: None
+    height: "200dp"
+	MDSeparator
+	
+	MDGridLayout:
+		cols: 2
+		padding: '0dp', '20dp'
+
+		MDLabel:
+			text: 'Name:'
+
+		MDLabel:
+			text: root.name
+
+		MDLabel:
+			text: 'Hersteller:'
+
+		MDLabel:
+			text: root.brand
+
+		MDLabel:
+			text: 'Beschreibung:'
+
+		MDLabel:
+			text: root.description
+
+		MDLabel:
+			text: 'Einkaufspreis:'
+
+		MDLabel:
+			text: root.price
+
+		MDLabel:
+			text: 'Verkaufspreis:'
+
+		MDLabel:
+			text: root.sale_price
+
+		MDLabel:
+			text: 'Steuersatz:'
+
+		MDLabel:
+			text: root.tax
+
+		MDLabel:
+			text: 'EAN-Code:'
+
+		MDLabel:
+			text: root.ean_code
+
 <ProductCard>
 	radius: '0dp'
 	# size_hint: None, None
@@ -16,6 +68,7 @@
         MDIconButton:
             icon: 'information-outline'
             pos_hint: {'top': 1, 'right': 1}
+			on_release: root.info.open()
 
 		MDBoxLayout:
 			orientation: 'vertical'
