@@ -8,3 +8,7 @@ class Product(Base):
 
 class Sale(Base):
     """The model for receipt."""
+
+
+class Payment(Base):
+    """The model for Pyments."""
