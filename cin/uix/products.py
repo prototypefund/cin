@@ -2,7 +2,6 @@ from kivy.lang.builder import Builder
 from kivymd.uix.behaviors import RoundedRectangularElevationBehavior
 from kivymd.uix.card import MDCard
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.gridlayout import MDGridLayout
 from kivy.core.window import Window
 from kivymd.uix.segmentedcontrol import MDSegmentedControl
 from kivy.uix.scrollview import ScrollView
@@ -13,6 +12,7 @@ from kivymd.uix.dialog import MDDialog
 from sqlalchemy import select
 from pathlib import Path
 from cin.transactions import Sale
+from cin import sync
 
 
 Builder.load_file('uix/products.kv')
@@ -47,8 +47,7 @@ class ProductCard(MDCard, RoundedRectangularElevationBehavior):
 
     def on_release(self):
         sale = Sale()
-        sale.close()
-        print('#################  ' + str(self._product_id))
+        sale.add(product_id=self._product_id)
 
 
 class ProductGrid(ScrollView):
@@ -98,4 +97,5 @@ class ProductGrid(ScrollView):
                 self.ids.grid.add_widget(product)
 
     def on_kv_post(self, instance):
-        self.update()
+        sync.products(self._app)
+        # self.update()

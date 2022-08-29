@@ -5,6 +5,7 @@ from cin.models import Product
 from cin.uix.message import Message
 from pathlib import Path
 import shutil
+from kivymd.app import MDApp
 
 
 def products(app):
@@ -43,6 +44,8 @@ def products(app):
                         file_path=image_file)
 
             session.commit()
+            app.refs['product-grid'].update()
+            app.refs['product-grid'].on_resize()
 
     def on_error(req, error):
         message = Message(
