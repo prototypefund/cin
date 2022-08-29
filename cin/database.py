@@ -5,7 +5,7 @@ from alembic.config import Config
 from alembic.migration import MigrationContext
 from alembic.script import ScriptDirectory
 from alembic.runtime.environment import EnvironmentContext
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, Column, Integer, JSON
 
 
 meta = MetaData(
@@ -26,6 +26,9 @@ class Base:
     @declared_attr
     def __tablename__(cls):
         return cls.__name__.lower()
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    data = Column(JSON)
 
 
 Base = declarative_base(cls=Base, metadata=meta)

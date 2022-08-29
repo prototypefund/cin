@@ -29,7 +29,7 @@ def products(app):
             session.commit()
 
             images_path = app.data_dir/'products/images'
-            shutil.rmtree(images_path)
+            shutil.rmtree(images_path, ignore_errors=True)
             images_path.mkdir(parents=True, exist_ok=True)
 
             for product in data:

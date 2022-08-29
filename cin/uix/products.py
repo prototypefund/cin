@@ -12,6 +12,7 @@ from cin.models import Product
 from kivymd.uix.dialog import MDDialog
 from sqlalchemy import select
 from pathlib import Path
+from cin.transactions import Sale
 
 
 Builder.load_file('uix/products.kv')
@@ -40,8 +41,14 @@ class ProductCard(MDCard, RoundedRectangularElevationBehavior):
     price = StringProperty()
     image = StringProperty()
 
-    def __init__(self, **kwargs):
+    def __init__(self, product_id, **kwargs):
         super().__init__(**kwargs)
+        self._product_id = product_id
+
+    def on_release(self):
+        sale = Sale()
+        sale.close()
+        print('#################  ' + str(self._product_id))
 
 
 class ProductGrid(ScrollView):
@@ -69,12 +76,14 @@ class ProductGrid(ScrollView):
                 image_path = Path(self._app.data_dir/'products/images'/image_name)
 
                 product = ProductCard(
+                        result.id,
                         name=name,
                         price=sale_price,
                         image=str(image_path))
 
                 product.info = MDDialog(
                         title='Produktinformation',
+                        radius=[2, 0, 0, 0],
                         content_cls=ProductInfo(
                             name=name,
                             brand=result.data['brand'],
