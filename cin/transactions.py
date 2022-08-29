@@ -43,6 +43,10 @@ class Sale:
             data['closed'] = datetime.now().isoformat()
             sale.data = data
             session.commit()
+            receipt = self._app.refs['receipt']
+            sum = self._app.refs['sum']
+            receipt.update()
+            sum.update()
 
     def list(self):
         with self._app.db_session() as session:
@@ -105,11 +109,11 @@ class Sale:
                 .where(models.Sale.id == self._id)
             sale = session.execute(statement).scalars().first()
 
-            sum = .0
+            sum = .00
             for sale_data in sale.data['sales']:
                 sum += sale_data['product']['salePrice']*sale_data['quantity']
 
-        return sum
+        return round(sum, 2)
 
     def tax(self):
         with self._app.db_session() as session:

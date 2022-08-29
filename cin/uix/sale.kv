@@ -29,6 +29,28 @@
 	size_hint_x: None
 	width: '600dp'
 
+<CardContent>
+	size_hint_y: None
+	height: '350dp'
+	spacing: '10dp'
+	padding: '0dp', '10dp'
+
+	DialogCard:
+		MDLabel:
+			size_hint_y: None
+			height: '30dp'
+			text: 'Zu zahlender Kartenbetrag'
+			theme_text_color: 'Custom'
+			text_color: app.theme_cls.primary_dark
+
+		MDSeparator
+
+		ToPayLabel:
+			id: to_pay
+			halign: 'center'
+			theme_text_color: 'Custom'
+			text_color: 'gray'
+			font_style: 'H3'
 
 <CashContent>
 	size_hint_y: None
@@ -123,6 +145,10 @@
 			id: return_cash
 			halign: 'center'
 			font_style: 'H3'
+
+
+<CardPayDialog>
+	title: 'Kartenzahlung'
 
 
 <CashPayDialog>
@@ -226,7 +252,7 @@
 								root.ids.number_screen_manager.transition.direction = 'left'
 								root.ids.number_screen_manager.current = 'second_screen'
 
-						NumberActionButton:
+						CardButton:
 							text: ' Kartenzahlung'
 							icon: 'credit-card-check-outline'
 							halign: 'left'

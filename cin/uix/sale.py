@@ -1,6 +1,5 @@
 from kivy.lang.builder import Builder
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.card import MDCard
 from kivymd.uix.label import MDLabel
 from kivymd.uix.button import (
@@ -11,7 +10,6 @@ from kivy.properties import NumericProperty
 from kivymd.app import MDApp
 from cin import transactions
 from kivymd.uix.dialog import MDDialog
-from cin import transactions
 
 
 Builder.load_file('uix/sale.kv')
@@ -25,15 +23,39 @@ class CashContent(MDBoxLayout):
     ...
 
 
+class CardContent(MDBoxLayout):
+    ...
+
+
 class DialogCard(MDCard, RectangularElevationBehavior):
     pass
+
+
+class CashPaymentDoneButton(MDRaisedButton):
+    def __init__(self, dialog, **kwargs):
+        super().__init__(**kwargs)
+        self._dialog = dialog
+
+    def on_release(self):
+        sale = transactions.Sale()
+        sale.close()
+        self._dialog.dismiss()
+
+
+class CashPaymentCancelButton(MDFlatButton):
+    def __init__(self, dialog, **kwargs):
+        super().__init__(**kwargs)
+        self._dialog = dialog
+
+    def on_release(self):
+        self._dialog.dismiss()
 
 
 class PayDialog(MDDialog):
     def __init__(self, **kwargs):
         self.buttons = [
-            MDFlatButton(text='ABBRECHEN'),
-            MDRaisedButton(text='BEZAHLT')
+            CashPaymentCancelButton(dialog=self, text='ABBRECHEN'),
+            CashPaymentDoneButton(dialog=self, text='BEZAHLT')
         ]
         super().__init__(**kwargs)
 
@@ -41,6 +63,12 @@ class PayDialog(MDDialog):
 class CashPayDialog(PayDialog):
     def __init__(self, **kwargs):
         self.content_cls = CashContent()
+        super().__init__(**kwargs)
+
+
+class CardPayDialog(PayDialog):
+    def __init__(self, **kwargs):
+        self.content_cls = CardContent()
         super().__init__(**kwargs)
 
 
@@ -68,14 +96,26 @@ class GivenCashField(MDTextField):
     def on_text(self, instance, value):
         to_pay = self.parent.parent.ids.to_pay.value
         return_cash = self.parent.parent.ids.return_cash
+        self.text_color_normal = 'gray'
+        self.text_color_focus = 'gray'
 
-        self.value = float(self.text.replace(',', '.'))
-        return_cash.value = self.value-to_pay
+        try:
+            self.value = float(self.text.replace(',', '.'))
+            return_cash.value = self.value-to_pay
+        except Exception:
+            self.text_color_normal = 'red'
+            self.text_color_focus = 'red'
 
 
 class CashButton(NumberActionButton):
     def on_release(self):
         dialog = CashPayDialog()
+        dialog.open()
+
+
+class CardButton(NumberActionButton):
+    def on_release(self):
+        dialog = CardPayDialog()
         dialog.open()
 
 
@@ -95,7 +135,7 @@ class ReturnCash(MDLabel):
         self.vaule = 0.0
 
     def on_value(self, instance, value):
-        self.text = str(round(value, 2)).replace('.', ',') + '€'
+        self.text = str(value).replace('.', ',') + '€'
 
 
 class Sum(MDLabel):
@@ -106,4 +146,4 @@ class Sum(MDLabel):
 
     def update(self):
         sale = transactions.Sale()
-        self.text = str(round(sale.sum(), 2)).replace('.', ',') + '€'
+        self.text = str(sale.sum()).replace('.', ',') + '€'
