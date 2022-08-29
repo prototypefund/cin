@@ -1,4 +1,7 @@
 <ReceiptListItem>
+	text: self.name
+	secondary_text: self.brand
+
 	ReceiptActions:
 		MDCheckbox:
 
@@ -6,10 +9,8 @@
 	ReceiptPrice:
 		size_hint_x: None
 		MDLabel:
-			text: '1111.34'
+			text: root.price
 
 <Receipt>
-	MDList:
-		ReceiptListItem:
-		    text: "Two-line item with avatar"
-			secondary_text: "Secondary text here"
+	ReceiptList:
+		id: list

@@ -17,6 +17,117 @@
     text_color: 1, 1, 1, 1
 	icon_color: 1, 1, 1, 1
 
+<DialogCard>
+	elevation: '3dp'
+	radius: 0
+	orientation: 'vertical'
+	padding: '10dp'
+	
+
+<PayDialog>
+	type: 'custom'
+	size_hint_x: None
+	width: '600dp'
+
+
+<CashContent>
+	size_hint_y: None
+	height: '350dp'
+	spacing: '10dp'
+	padding: '0dp', '10dp'
+
+	MDGridLayout:
+		cols: 3
+		rows: 4
+		spacing: '5dp'
+
+		PayNumberButton:
+			text: '7'
+
+		PayNumberButton:
+			text: '8'
+
+		PayNumberButton:
+			text: '9'
+
+		PayNumberButton:
+			text: '4'
+
+		PayNumberButton:
+			text: '5'
+
+		PayNumberButton:
+			text: '6'
+
+		PayNumberButton:
+			text: '1'
+
+		PayNumberButton:
+			text: '2'
+
+		PayNumberButton:
+			text: '3'
+
+		PayNumberButton:
+			text: '0'
+
+		PayNumberButton:
+			text: '00'
+
+		PayNumberButton:
+			text: ','
+	
+
+	DialogCard:
+		MDLabel:
+			size_hint_y: None
+			height: '30dp'
+			text: 'Gegeben:'
+			theme_text_color: 'Custom'
+			text_color: app.theme_cls.primary_dark
+
+		MDSeparator
+
+		GivenCashField:
+			id: given_cash
+			halign: 'center'
+			font_size: '46sp'
+			text_color_normal: 'gray'
+
+		MDLabel:
+			size_hint_y: None
+			height: '30dp'
+			text: 'Zu zahlender Betrag'
+			theme_text_color: 'Custom'
+			text_color: app.theme_cls.primary_dark
+
+		MDSeparator
+
+		ToPayLabel:
+			id: to_pay
+			halign: 'center'
+			theme_text_color: 'Custom'
+			text_color: 'gray'
+			font_style: 'H3'
+
+		MDLabel:
+			size_hint_y: None
+			height: '30dp'
+			text: 'Rückgabe'
+			theme_text_color: 'Custom'
+			text_color: app.theme_cls.primary_dark
+
+		MDSeparator
+
+		ReturnCash:
+			id: return_cash
+			halign: 'center'
+			font_style: 'H3'
+
+
+<CashPayDialog>
+	title: 'Barzahlung'
+
 
 <Sale>
 	padding: '5dp'
@@ -44,9 +155,9 @@
 			padding: '15dp'
 			height: '40dp'
 
-			MDLabel:
+			Sum:
 				halign: 'right'
-				text: '122.43'
+				text: '0,00€'
 				font_style: 'H6'
 
 		ScreenManager:
@@ -108,7 +219,7 @@
 						padding: '0dp', '5dp','5dp', '5dp'
 
 						NumberActionButton:
-							text: ' more'
+							text: ' mehr'
 							icon: 'page-next-outline'
 							halign: 'left'
 							on_press:
@@ -116,12 +227,12 @@
 								root.ids.number_screen_manager.current = 'second_screen'
 
 						NumberActionButton:
-							text: ' Card payment'
+							text: ' Kartenzahlung'
 							icon: 'credit-card-check-outline'
 							halign: 'left'
 
-						NumberActionButton:
-							text: ' Cash payment'
+						CashButton:
+							text: ' Barzahlung'
 							icon: 'cash-multiple'
 							halign: 'left'
 

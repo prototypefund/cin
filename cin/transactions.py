@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from sqlalchemy import select
 from cin import models
+# from cin.uix.receipt import ReceiptListItem
 from copy import deepcopy
 from datetime import datetime
 
@@ -13,8 +14,6 @@ class Sale:
             statement = select(models.Sale.id) \
                 .where(models.Sale.data['state'].as_string() == 'open')
             id = session.execute(statement).scalars().first()
-
-            print(id)
 
             if id:
                 self._id = id
@@ -45,6 +44,14 @@ class Sale:
             sale.data = data
             session.commit()
 
+    def list(self):
+        with self._app.db_session() as session:
+            statement = select(models.Sale) \
+                .where(models.Sale.id == self._id)
+            sale = session.execute(statement).scalars().first()
+
+            return sale.data['sales']
+
     def add(self, product_id):
         with self._app.db_session() as session:
             statement = select(models.Product) \
@@ -70,6 +77,11 @@ class Sale:
             data['sales'].append(sale_data)
             sale.data = data
             session.commit()
+
+            receipt = self._app.refs['receipt']
+            sum = self._app.refs['sum']
+            receipt.update()
+            sum.update()
 
     def remove(self, index):
         with self._app.db_session() as session:
